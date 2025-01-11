@@ -23,12 +23,15 @@ export class WhisperSettingsTab extends PluginSettingTab {
 		this.createApiUrlSetting();
 		this.createModelSetting();
 		this.createPromptSetting();
+		this.createChatGPTPromptSetting();
 		this.createLanguageSetting();
 		this.createSaveAudioFileToggleSetting();
 		this.createSaveAudioFilePathSetting();
 		this.createNewFileToggleSetting();
 		this.createNewFilePathSetting();
 		this.createDebugModeToggleSetting();
+		this.createPrependTimestampSetting();
+		this.createTimestampFormatSetting();
 	}
 
 	private getUniqueFolders(): TFolder[] {
@@ -117,6 +120,22 @@ export class WhisperSettingsTab extends PluginSettingTab {
 				await this.settingsManager.saveSettings(this.plugin.settings);
 			}
 		);
+	}
+
+
+	createChatGPTPromptSetting() {
+	  new Setting(this.containerEl)
+	    .setName("ChatGPT Prompt")
+	    .setDesc("Define the prompt sent to ChatGPT. Use {transcribedText} as a placeholder for the transcription.")
+	    .addTextArea((text) =>
+	      text
+	        .setPlaceholder("Please process the following transcription:\n\n{transcribedText}")
+	        .setValue(this.plugin.settings.chatGPTPrompt)
+	        .onChange(async (value) => {
+	          this.plugin.settings.chatGPTPrompt = value;
+	          await this.plugin.settingsManager.saveSettings(this.plugin.settings);
+	        })
+	    );
 	}
 
 	private createLanguageSetting(): void {
@@ -235,5 +254,36 @@ export class WhisperSettingsTab extends PluginSettingTab {
 						);
 					});
 			});
+	}
+
+	createPrependTimestampSetting() {
+	  new Setting(this.containerEl)
+	    .setName("Prepend Timestamp")
+	    .setDesc("Toggle to prepend a timestamp to the processed text.")
+	    .addToggle((toggle) =>
+	      toggle
+	        .setValue(this.plugin.settings.prependTimestamp)
+	        .onChange(async (value) => {
+	          this.plugin.settings.prependTimestamp = value;
+	          await this.plugin.settingsManager.saveSettings(this.plugin.settings);
+	        })
+	    );
+	}
+
+	createTimestampFormatSetting() {
+	  new Setting(this.containerEl)
+	    .setName("Timestamp Format")
+	    .setDesc(
+	      "Define the format for timestamps. Uses Moment.js format strings (e.g., YYYY-MM-DD HH:mm:ss)."
+	    )
+	    .addText((text) =>
+	      text
+	        .setPlaceholder("YYYY-MM-DD HH:mm:ss")
+	        .setValue(this.plugin.settings.timestampFormat)
+	        .onChange(async (value) => {
+	          this.plugin.settings.timestampFormat = value;
+	          await this.plugin.settingsManager.saveSettings(this.plugin.settings);
+	        })
+	    );
 	}
 }

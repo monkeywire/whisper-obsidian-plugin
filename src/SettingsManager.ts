@@ -11,6 +11,9 @@ export interface WhisperSettings {
 	debugMode: boolean;
 	createNewFileAfterRecording: boolean;
 	createNewFileAfterRecordingPath: string;
+	chatGPTPrompt: string;
+	prependTimestamp: boolean; // New toggle for timestamps
+	timestampFormat: string; // New format string for timestamps
 }
 
 export const DEFAULT_SETTINGS: WhisperSettings = {
@@ -24,6 +27,9 @@ export const DEFAULT_SETTINGS: WhisperSettings = {
 	debugMode: false,
 	createNewFileAfterRecording: true,
 	createNewFileAfterRecordingPath: "",
+	chatGPTPrompt: "\n\n{transcribedText}",
+	prependTimestamp: false, // Default: off
+  	timestampFormat: "YYYY-MM-DD HH:mm:ss", // Default format
 };
 
 export class SettingsManager {
