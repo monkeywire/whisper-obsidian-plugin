@@ -1,3 +1,8 @@
+# What is different with this fork from the originaly code-base?
+
+This fork includes the ability to proccess transcribed text automaticly with a given prompt.  Something like "Include paragraph breaks where nessecary."  Additionaly, the ability to pre-pend time stamps to the transcriptions. 
+
+
 # Speech-to-text in Obsidian using OpenAI Whisper 🗣️📝
 
 Obsidian Whisper is a plugin that effortlessly turns your speech into written notes. Just speak your mind, and let [Whisper](https://openai.com/research/whisper) from OpenAI do the rest!

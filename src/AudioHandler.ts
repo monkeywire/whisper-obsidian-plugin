@@ -87,7 +87,7 @@ export class AudioHandler {
         const chatGPTResponse = await axios.post(
             "https://api.openai.com/v1/chat/completions",
             {
-                model: "gpt-3.5-turbo",
+                model: "gpt-4o-mini",//"gpt-3.5-turbo",
                 messages: [{ role: "user", content: chatGPTPrompt }],
             },
             {
@@ -104,7 +104,7 @@ export class AudioHandler {
         // Prepend timestamp if the setting is enabled
         if (this.plugin.settings.prependTimestamp) {
             const timestamp = moment().format(this.plugin.settings.timestampFormat);
-            processedText = `${timestamp}\n${processedText}`;
+            processedText = `${timestamp}\n\n${processedText}`;
         }
 
         // Determine where to insert processed text
