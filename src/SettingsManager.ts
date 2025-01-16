@@ -27,7 +27,7 @@ export const DEFAULT_SETTINGS: WhisperSettings = {
 	debugMode: false,
 	createNewFileAfterRecording: true,
 	createNewFileAfterRecordingPath: "",
-	chatGPTPrompt: "\n\n{transcribedText}",
+	chatGPTPrompt: "Echo back the text I provide with corrections only for spelling, grammar, punctuation, syntax, and paragraph structure. If voice-to-text errors are present, replace incorrect words or phrases with the most likely correct ones, documenting these changes under an “ASSUMPTIONS” section. Preserve the original meaning and structure without paraphrasing or omitting any parts.  There might be corrective instructions in the transcription text given by the speaker; follow it as best as possible documenting your assumptions about the corrective actions. Document all edits for transparency. Always include all parts of the text, verifying completeness in the “ASSUMPTIONS” section.  Again; add paragraph structure so it looks nice and not like a giant wall of text; make minor corrections if needed to make it work!!!\nThe transcription text follows:\n\n{transcribedText}",
 	prependTimestamp: false, // Default: off
   	timestampFormat: "YYYY-MM-DD HH:mm:ss", // Default format
 };
